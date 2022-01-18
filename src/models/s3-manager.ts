@@ -2,7 +2,7 @@ import AWS from 'aws-sdk';
 import { promises as fs } from 'fs';
 import { GithubActionConfiguration } from './github-action-configuration';
 import mime from 'mime-types';
-
+import { PutBucketWebsiteRequest } from 'aws-sdk/clients/s3';
 
 export class S3Manager {
     private s3: AWS.S3;
@@ -38,6 +38,19 @@ export class S3Manager {
     async createEmptyBucket(bucket: string) {
         try {
             await this.s3.createBucket({ Bucket: bucket }).promise();
+            await this.s3.putBucketAcl({ ACL: 'public-read', Bucket: bucket });
+            const putBucketWebsiteRequest: PutBucketWebsiteRequest = {
+                Bucket: bucket,
+                WebsiteConfiguration: {
+                  ErrorDocument: {
+                    Key: 'index.html'
+                  },
+                  IndexDocument: {
+                    Suffix: 'index.html'
+                  },
+                }
+            };
+            await this.s3.putBucketWebsite(putBucketWebsiteRequest);
         } catch (error) {
             if (error.statusCode === 409) {
                 // if bucket already exists we should clean it before deploying
