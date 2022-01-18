@@ -32,7 +32,7 @@ jobs:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
               with:
-                  node-version: '14'
+                  node-version: '16'
             # Build
             - run: npm ci
             - run: npm run build
