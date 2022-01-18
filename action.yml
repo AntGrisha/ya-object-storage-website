@@ -1,0 +1,31 @@
+name: "Yandex object storage website management"
+description: "Tool to deploy or remove website via Yandex Object Storage"
+author: "antgrisha"
+inputs:
+    access-key-id:
+        description: "Service account access key id"
+        default: ""
+        required: true
+    secret-access-key:
+        description: "Service account secret access key"
+        default: ""
+        required: true
+    bucket:
+        description: "Bucket name"
+        default: ""
+        required: true
+    path:
+        description: "Path to upload folder"
+        default: ""
+        required: true
+    remove:
+        description: "Remove bucket and website"
+        default: false
+        required: false
+
+runs:
+    using: "node14"
+    main: "dist/index.js"
+branding:
+    icon: "upload-cloud"
+    color: "blue"

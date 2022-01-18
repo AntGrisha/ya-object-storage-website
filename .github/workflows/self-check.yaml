@@ -1,0 +1,14 @@
+name: "self-check"
+on:
+    push:
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: ./
+              with:
+                  accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
+                  secretAccessKey: ${{ secrets.SECRET_ACCESS_KEY }}
+                  bucket: ${{ secrets.BUCKET }}
+                  path: "./src"
