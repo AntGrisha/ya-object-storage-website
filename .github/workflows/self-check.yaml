@@ -12,4 +12,3 @@ jobs:
                   secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
                   bucket: "check-remote"
                   path: "./src"
-                  remove: "true"
