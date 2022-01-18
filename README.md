@@ -37,7 +37,7 @@ jobs:
             - run: npm ci
             - run: npm run build
             # Deploy
-            - uses: antgrisha/ya-object-storage-website-action@v1
+            - uses: antgrisha/ya-object-storage-website@v1.0.1
               with:
                   access-key-id: ${{ secrets.ACCESS_KEY_ID }}
                   secret-access-key: ${{ secrets.SECRET_ACCESS_KEY }}
