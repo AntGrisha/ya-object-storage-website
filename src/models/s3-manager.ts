@@ -54,7 +54,6 @@ export class S3Manager {
             };
             await this.s3.putBucketWebsite(putBucketWebsiteRequest).promise();
         } catch (error) {
-            console.log(error);
             if (error.statusCode === 409) {
                 // if bucket already exists we should clean it before deploying
                 await this.clearBucket(bucket);
