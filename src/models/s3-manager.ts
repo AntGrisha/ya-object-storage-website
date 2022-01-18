@@ -38,8 +38,7 @@ export class S3Manager {
     async createEmptyBucket(bucket: string) {
         try {
             await this.s3.createBucket({
-                Bucket: bucket,
-                ACL: 'public-read',
+                Bucket: bucket
             }).promise();
             const putBucketWebsiteRequest: PutBucketWebsiteRequest = {
                 Bucket: bucket,
@@ -70,6 +69,7 @@ export class S3Manager {
             Bucket: bucket,
             Body: file,
             ContentType: mime.lookup(filePath) as string,
+            ACL: 'public-read'
         }).promise();
     }
 
