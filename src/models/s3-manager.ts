@@ -38,7 +38,7 @@ export class S3Manager {
     async createEmptyBucket(bucket: string) {
         try {
             await this.s3.createBucket({ Bucket: bucket }).promise();
-            await this.s3.putBucketAcl({ ACL: 'public-read', Bucket: bucket });
+            await this.s3.putBucketAcl({ ACL: 'public-read', Bucket: bucket }).promise();
             const putBucketWebsiteRequest: PutBucketWebsiteRequest = {
                 Bucket: bucket,
                 WebsiteConfiguration: {
@@ -50,7 +50,7 @@ export class S3Manager {
                   },
                 }
             };
-            await this.s3.putBucketWebsite(putBucketWebsiteRequest);
+            await this.s3.putBucketWebsite(putBucketWebsiteRequest).promise();
         } catch (error) {
             if (error.statusCode === 409) {
                 // if bucket already exists we should clean it before deploying
